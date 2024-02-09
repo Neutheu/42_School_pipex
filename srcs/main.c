@@ -6,7 +6,7 @@
 /*   By: nsouchal <nsouchal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 12:14:12 by nsouchal          #+#    #+#             */
-/*   Updated: 2024/02/07 13:10:25 by nsouchal         ###   ########.fr       */
+/*   Updated: 2024/02/09 11:57:44 by nsouchal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,33 @@ void	exec_cmd(char **envp, char *cmd)
 	execve(path_cmd, cmd_array, envp);
 }
 
-void	child_process_1(int f1, int end, char *cmd1)
+void	child_process_1(char **av, char **envp, int *end)
 {
-	dup2(0, f1);
+	int	f1;
 
+	f1 = open(av[1], O_RDONLY);
+	dup2(f1, 0);
+	dup2(end[1], 1);
+	close (end[0]);
+	close (end[1]);
+	close (f1);
+	exec_cmd(envp, av[2]);
 }
 
-void	pipex(int f1, int f2, char **av, char **envp)
+void	child_process_2(char **av, char **envp, int *end)
+{
+	int	f2;
+
+	f2 = open(av[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
+	dup2(f2, 1);
+	dup2(end[0], 0);
+	close (end[0]);
+	close (end[1]);
+	close (f2);
+	exec_cmd(envp, av[3]);
+}
+
+void	pipex(char **av, char **envp)
 {
 	int		end[2];
 	pid_t	child_1;
@@ -81,27 +101,19 @@ void	pipex(int f1, int f2, char **av, char **envp)
 	// if (child[0] == -1)
 	// 	return ()
 	if (child_1 == 0)
-		child_process_1(f1, end[0], av[2]);
+		child_process_1(av, envp, end);
 	child_2 = fork();
 	if (child_2 == 0)
-		child_process_2;
-
+		child_process_2(av, envp, end);
+	close(end[0]);
+	close(end[1]);
+	waitpid(child_1, NULL, 0);
+	waitpid(child_2, NULL, 0);
 }
 
 int main(int ac, char **av, char **envp)
 {
 	(void)ac;
-	(void)av;
-	char *path_cmd = find_valid_path("wc", find_all_path(envp));
-	ft_printf("%s", path_cmd);
-	free (path_cmd);
-	int f1;
-	int f2;
-
-	f1 = open(av[1], O_RDONLY);
-	f2 = open(av[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (f1 < 0 || f2 < 0)
-		return (-1);
-	pipex(f1, f2, av, envp);
+	pipex(av, envp);
 	return (0);
 }
