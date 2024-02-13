@@ -6,13 +6,13 @@
 #    By: nsouchal <nsouchal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 09:14:12 by nsouchal          #+#    #+#              #
-#    Updated: 2024/02/07 12:30:15 by nsouchal         ###   ########.fr        #
+#    Updated: 2024/02/13 12:59:17 by nsouchal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 
-SRC_FILE = main.c modified_split.c utils.c
+SRC_FILE = main.c modified_split.c utils.c command.c
 
 DIR_BUILD		=	.build/
 DIR_SRCS 		= 	srcs/
