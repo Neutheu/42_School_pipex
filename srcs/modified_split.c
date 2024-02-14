@@ -6,7 +6,7 @@
 /*   By: nsouchal <nsouchal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 11:24:32 by nsouchal          #+#    #+#             */
-/*   Updated: 2024/02/07 12:21:31 by nsouchal         ###   ########.fr       */
+/*   Updated: 2024/02/14 08:53:43 by nsouchal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,3 @@ char	**ft_split_modified(char const *s, char c)
 	array = fill_array(array, s, siz_array, c);
 	return (array);
 }
-

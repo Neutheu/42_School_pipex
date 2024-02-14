@@ -6,13 +6,13 @@
 #    By: nsouchal <nsouchal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 09:14:12 by nsouchal          #+#    #+#              #
-#    Updated: 2024/02/13 12:59:17 by nsouchal         ###   ########.fr        #
+#    Updated: 2024/02/14 08:58:28 by nsouchal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 
-SRC_FILE = main.c modified_split.c utils.c command.c
+SRC_FILE = main.c modified_split.c utils.c command.c error.c
 
 DIR_BUILD		=	.build/
 DIR_SRCS 		= 	srcs/
@@ -24,7 +24,7 @@ HEADERFILES		=
 OBJS			=	$(patsubst %.c, $(DIR_BUILD)%.o, $(SRCS))
 SRCS			=	$(addprefix $(DIR_SRCS),$(SRC_FILE))
 
-FLAGS		=	-Wall -Werror -Wextra
+FLAGS		=	-Wall -Werror -Wextra -g
 
 CC = cc
 

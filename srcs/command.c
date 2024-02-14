@@ -6,7 +6,7 @@
 /*   By: nsouchal <nsouchal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:57:57 by nsouchal          #+#    #+#             */
-/*   Updated: 2024/02/13 13:01:03 by nsouchal         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:08:55 by nsouchal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,26 @@ char	*find_valid_path(char *cmd_with_flags, char **all_path)
 
 	i = 0;
 	splited_cmd = ft_split(cmd_with_flags, ' ');
-	cmd = splited_cmd[0];
+	if (!splited_cmd[0])
+		cmd = ft_strdup(cmd_with_flags);
+	else
+		cmd = splited_cmd[0];
+	if (ft_strlen(cmd_with_flags) == 0)
+		handle_error("permission denied:", "", "", 2);
 	while (all_path[i])
 	{
 		path_cmd = ft_strjoin(all_path[i], cmd);
 		if (access(path_cmd, F_OK | X_OK) == 0)
-			break ;
+		{
+			free_double_array(all_path);
+			free_double_array(splited_cmd);
+			return (path_cmd);
+		}
 		free(path_cmd);
 		i++;
 	}
+	if (ft_strlen(cmd_with_flags) != 0)
+		handle_error(cmd, ": ", "command not found", 2);
 	free_double_array(all_path);
 	free_double_array(splited_cmd);
 	return (path_cmd);
@@ -62,4 +73,8 @@ void	exec_cmd(char **envp, char *cmd)
 	cmd_array = ft_split(cmd, ' ');
 	path_cmd = find_valid_path(cmd, find_all_path(envp));
 	execve(path_cmd, cmd_array, envp);
+	close (0);
+	close (1);
+	free_double_array(cmd_array);
+	exit(127);
 }
