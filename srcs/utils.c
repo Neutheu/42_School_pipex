@@ -6,7 +6,7 @@
 /*   By: nsouchal <nsouchal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:25:25 by nsouchal          #+#    #+#             */
-/*   Updated: 2024/02/14 15:01:07 by nsouchal         ###   ########.fr       */
+/*   Updated: 2024/02/15 09:16:31 by nsouchal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,10 @@ void	free_double_array(char **array)
 		i++;
 	}
 	free(array);
+}
+
+void	free_two_array(char **array_1, char **array_2)
+{
+	free_double_array(array_1);
+	free_double_array(array_2);
 }
