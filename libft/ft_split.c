@@ -6,7 +6,7 @@
 /*   By: nsouchal <nsouchal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 08:17:26 by nsouchal          #+#    #+#             */
-/*   Updated: 2024/02/07 11:25:59 by nsouchal         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:36:07 by nsouchal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	**ft_split(char const *s, char c)
 	size_t	siz_array;
 
 	if (!s)
-		return (0);
+		return (NULL);
 	i = 0;
 	siz_array = 0;
 	while (s[i])

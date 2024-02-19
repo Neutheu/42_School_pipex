@@ -6,7 +6,7 @@
 #    By: nsouchal <nsouchal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 09:14:12 by nsouchal          #+#    #+#              #
-#    Updated: 2024/02/14 08:58:28 by nsouchal         ###   ########.fr        #
+#    Updated: 2024/02/15 13:24:59 by nsouchal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,12 @@ DIR_SRCS 		= 	srcs/
 DIR_HEADERS		=	includes/
 DIR_LIBFT		=	libft/
 
-HEADERFILES		=
+HEADERFILES		=	$(DIR_HEADERS)pipex.h
 
 OBJS			=	$(patsubst %.c, $(DIR_BUILD)%.o, $(SRCS))
 SRCS			=	$(addprefix $(DIR_SRCS),$(SRC_FILE))
 
-FLAGS		=	-Wall -Werror -Wextra -g
+FLAGS		=	-Wall -Werror -Wextra
 
 CC = cc
 
